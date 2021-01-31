@@ -234,7 +234,7 @@ class EPackageDocGenHtml extends CoreDocGen implements IDocGenerator{
     	if(elem.EGenericType != null){
     		elem.EGenericType.preparePossibleReference
     	} else {
-    		'''<div class="alert">MISSING TYPE elem!</div>'''
+    		'''void'''
     	}
     }
     
@@ -296,10 +296,10 @@ class EPackageDocGenHtml extends CoreDocGen implements IDocGenerator{
 	    «op.preparePossibleReference»[«op.lowerBound»..«IF op.upperBound == ETypedElement::UNBOUNDED_MULTIPLICITY»*«ELSE»«op.upperBound»«ENDIF»]
 	    «ENDIF»
 	    «IF !op.EParameters.empty»
-	    <div class="label">Parameters:
+	    <div class="label">Parameters:</div>
 	    <ul>
 	    «FOR param : op.EParameters»
-	    	<li>«param.preparePossibleReference»[«param.lowerBound»..«IF param.upperBound == ETypedElement::UNBOUNDED_MULTIPLICITY»*«ELSE»«param.upperBound»«ENDIF»] <span class="teletype>"«escapeText(param.name)»</span></li>
+	    	<li>«param.preparePossibleReference»[«param.lowerBound»..«IF param.upperBound == ETypedElement::UNBOUNDED_MULTIPLICITY»*«ELSE»«param.upperBound»«ENDIF»] <span class="teletype">«escapeText(param.name)»</span></li>
 	    «ENDFOR»
 	    </ul>
 	    «ENDIF»
@@ -311,7 +311,7 @@ class EPackageDocGenHtml extends CoreDocGen implements IDocGenerator{
 	    '''
     
     override documentHeader(String sectionClass, String sectionTitle, String shortTitle, String label) {
-    	documentHeader(sectionClass, anchorDef(escapeLabel(label), sectionTitle).toString, label)
+    	documentHeader(sectionClass, anchorDef(escapeLabel(label), shortTitle).toString, label)
     }
     
     private def documentHeader(String sectionClass, String sectionAnchor, String label)
